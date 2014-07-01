@@ -1,14 +1,15 @@
 
-        package org.marcel.xmlcodegeneration;
+package org.marcel.xmlcodegeneration;
         
-        import org.marcel.xmlcodegeneration.model.*;
-        
-    
-    
-    public interface Tatate implements java.io.Serializable {
-        String buildStuff( Blblsssba  blblsssba );
+import org.marcel.xmlcodegeneration.model.*;
+import org.marcel.xmlcodegeneration.model.base.*;  
 
-        String transformStuff( Blblba  blblba );
+    
+public interface Service extends java.io.Serializable {
+         
+        String buildStuff( Person  person );
+
+        String transformStuff( Kunde  kunde );
 
           
 }

@@ -7,10 +7,10 @@ and open the template in the editor.
 
 
 <service>
-    <description className="Tatate" >Hello</description>
+    	<description>Hello</description>
     
-        <operation name="buildStuff" returnType="String" inputType="Blblsssba" exception="de.marcel.xmlgodegeneration.Exception" />
+        <operation name="buildStuff" returnType="String" inputType="Person" exception="de.marcel.xmlgodegeneration.Exception" />
         
-        <operation name="transformStuff" returnType="String" inputType="Blblba" />
+        <operation name="transformStuff" returnType="String" inputType="Kunde" />
          
 </service>

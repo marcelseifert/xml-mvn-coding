@@ -18,16 +18,14 @@
     ** portions of the class.
     *****************************************************************-->
     <xsl:text>
-        package org.marcel.xmlcodegeneration;
+package org.marcel.xmlcodegeneration;
         
-        import org.marcel.xmlcodegeneration.model.*;
+import org.marcel.xmlcodegeneration.model.*;
         
-    </xsl:text>
+</xsl:text>
     
-    public interface <xsl:value-of
-             select="$className"/>
-        <xsl:text> implements java.io.Serializable {
-        </xsl:text>
+public interface Service extends java.io.Serializable {
+         
         <xsl:for-each select="/service/operation"> 
                <xsl:value-of select="@returnType"/>
         <xsl:text> </xsl:text>
