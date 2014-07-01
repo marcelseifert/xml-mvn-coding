@@ -17,6 +17,13 @@
     ** Generate the class skeleton. Other templates will generate
     ** portions of the class.
     *****************************************************************-->
+    <xsl:text>
+        package org.marcel.xmlcodegeneration;
+        
+        import org.marcel.xmlcodegeneration.model.*;
+        
+    </xsl:text>
+    
     public interface <xsl:value-of
              select="$className"/>
         <xsl:text> implements java.io.Serializable {

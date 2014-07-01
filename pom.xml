@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.marcel</groupId>
-    <artifactId>XMLCodeGeneration</artifactId>
+    <artifactId>xmlcodegeneration</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <properties>
@@ -13,33 +13,89 @@
     
     <build>
         <plugins>
-             <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>xml-maven-plugin</artifactId>
-        <version>1.0</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>transform</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <transformationSets>
-            <transformationSet>
-              <dir>src/main/resources/xml</dir>
-              <stylesheet>src/main/resources/xsl/interface.xsl</stylesheet>
-            </transformationSet>
-          </transformationSets>
-        </configuration>
-        <dependencies>
-          <dependency>
-            <groupId>net.sf.saxon</groupId>
-            <artifactId>saxon</artifactId>
-            <version>8.7</version>
-          </dependency>
-        </dependencies>
-      </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>xml-maven-plugin</artifactId>
+                <version>1.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>transform</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <transformationSets>
+                        <transformationSet>
+                            <dir>src/main/resources/xml</dir>
+                            <stylesheet>src/main/resources/xsl/interface.xsl</stylesheet>
+                            <outputDir>src/main/java/</outputDir>
+                            <!-- omitted other required fields -->
+                            <fileMappers> 
+                                <fileMapper implementation="org.codehaus.plexus.components.io.filemappers.RegExpFileMapper">
+                                    <pattern>spec.xml</pattern>
+                                    <replacement>Service.java</replacement>
+                                    <replaceAll>true</replaceAll>
+                                </fileMapper>
+                            </fileMappers>
+                        </transformationSet>
+                    </transformationSets>
+         
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>net.sf.saxon</groupId>
+                        <artifactId>saxon</artifactId>
+                        <version>8.7</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jaxb2-maven-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <id>xjc</id>
+                        <goals>
+                            <goal>xjc</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <schemas>                                                                                      
+                        <schema>                                                                               
+                            <fileset>                                                                      
+                                <!-- Defaults to schemaDirectory -->                                   
+                                <directory>${basedir}/src/main/resources/xsd</directory>                                
+                                <!-- Defaults to schemaIncludes -->                                    
+                                <includes>                                                             
+                                    <include>*.*</include>                                         
+                                </includes>                                                            
+                                <!-- Defaults to schemaExcludes -->                                    
+                                <excludes>                                                             
+                                    <exclude>*.xs</exclude>                                        
+                                </excludes>                                                            
+                            </fileset>                           
+                        </schema>                                                                              
+                    </schemas>                        
+                    <!--  <packageName>com.example.myschema</packageName>  The name of your generated source package -->
+                    <extension>true</extension>
+                    <args>
+                        <arg>-XtoString</arg>
+                        <arg>-Xequals</arg>
+                        <arg>-XhashCode</arg>
+                        <arg>-Xcopyable</arg>
+                    </args>
+                    <plugins>
+                        <plugin>
+                            <groupId>org.jvnet.jaxb2_commons</groupId>
+                            <artifactId>jaxb2-basics</artifactId>
+                            <version>0.6.5</version>
+                        </plugin>
+                    </plugins>
+                </configuration>
+            </plugin>
         </plugins>
         
     </build>
