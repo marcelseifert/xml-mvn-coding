@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<xs:schema version="1.0"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:model="http://xmlcodegeneration.marcel.org/model"
+           xmlns:service="http://xmlcodegeneration.marcel.org"
+           elementFormDefault="qualified" targetNamespace="http://xmlcodegeneration.marcel.org">
+ 
+     <xs:import schemaLocation="schema2.xsd" namespace="http://xmlcodegeneration.marcel.org/model"></xs:import>
+  
+   
+		<xs:element name="service">
+		  <xs:complexType>
+		    <xs:sequence>
+		      <xs:element name="description" type="xs:string"/>
+		      <xs:element name="author" type="xs:string"/>
+		      <xs:element name="operation" type="service:operation" maxOccurs="unbounded" /> 
+		    </xs:sequence>
+		  </xs:complexType>
+		</xs:element>
+		
+		<xs:complexType name="operation">
+
+		  <xs:sequence>
+		      <xs:element name="outputMessage" type="service:outputMessage"/>
+		      <xs:element name="inputMessage"  type="service:inputMessage"  minOccurs="0" maxOccurs="unbounded" /> 
+		      <xs:element name="errorMessage" type="service:errorMessage" minOccurs="0"/>
+		    </xs:sequence>
+		     <xs:attribute name="name" type="xs:string" use="required"/>
+		</xs:complexType>
+		
+		<xs:complexType name="outputMessage">
+		  <xs:attribute name="type" type="xs:string"  use="required"></xs:attribute>
+		  <xs:attribute name="package" type="xs:string" ></xs:attribute>
+		</xs:complexType>
+        
+        
+        <xs:complexType name="inputMessage">
+           <xs:attribute name="type" type="xs:string"  use="required" /> 
+           <xs:attribute name="package" type="xs:string"  use="required" />
+       </xs:complexType> 
+       
+		<xs:complexType name="errorMessage" >
+				<xs:attribute name="type" type="xs:string"  use="required" /> 
+	           <xs:attribute name="package" type="xs:string"  use="required" />
+		</xs:complexType>
+		
+</xs:schema>

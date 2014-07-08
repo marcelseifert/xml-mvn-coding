@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<xsd:schema version="1.0"
+           xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+           xmlns:base="http://xmlcodegeneration.marcel.org/model/base"
+           elementFormDefault="qualified" targetNamespace="http://xmlcodegeneration.marcel.org/model">
+   
+   	<xsd:import schemaLocation="base.xsd" namespace="http://xmlcodegeneration.marcel.org/model/base"></xsd:import>
+     <xsd:complexType name="Office">
+       <xsd:sequence>
+            <xsd:element name="officeNo" type="xsd:string"/> 
+        </xsd:sequence>
+     </xsd:complexType>
+    <xsd:complexType name="Customer">
+    	<xsd:annotation>
+			<xsd:documentation>
+				A simple representation of a kunde
+			</xsd:documentation>
+		</xsd:annotation>
+     <xsd:complexContent>
+       <xsd:extension base="base:Person">
+       <xsd:sequence>
+            <xsd:element name="customernumber" type="xsd:string"/> 
+        </xsd:sequence>
+        </xsd:extension>
+        </xsd:complexContent>
+        
+         
+    </xsd:complexType>
+</xsd:schema>
