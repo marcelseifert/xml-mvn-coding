@@ -8,32 +8,52 @@
         Purpose of transformation follows.
 -->
 
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" >
     <xsl:output method="text"/>
- <xsl:template match="/">
-    <xsl:variable name="className" select="service/description/@className"/>
-    <!--
-    ********************************************************************
-    ** Generate the class skeleton. Other templates will generate
-    ** portions of the class.
-    *****************************************************************-->
-    <xsl:text>
+
+<xsl:template match="/">
+   
+  
+<xsl:text>
 package org.marcel.xmlcodegeneration;
         
 import org.marcel.xmlcodegeneration.model.*;
-        
-</xsl:text>
-    
-public interface Service extends java.io.Serializable {
          
-        <xsl:for-each select="/service/operation"> 
-               <xsl:value-of select="@returnType"/>
-        <xsl:text> </xsl:text>
-         <xsl:variable name="inputName" select="@inputType"/>
-         <xsl:variable name="inputLowerName" select="lower-case(@inputType)"/>
-         <xsl:value-of select="@name"/>( <xsl:value-of select="$inputName"/>
-         <xsl:text>  </xsl:text>
-         <xsl:value-of select="$inputLowerName"/> );
+/**
+*
+*
+</xsl:text>
+<xsl:text>*</xsl:text><xsl:value-of select="service/description" />
+<xsl:text>*</xsl:text><xsl:value-of select="service/author" />
+<xsl:text>
+*
+*/   
+
+</xsl:text>
+public interface Service extends java.io.Serializable {
+     
+        <xsl:for-each select="service/operation">
+        ahah
+	        <xsl:if test="./outputMessage/@name">
+	       	 <xsl:value-of select="./outputMessage/@name"/>
+	        </xsl:if>
+	        <xsl:if test="not(./outputMessage/@returnType)">
+	          <xsl:text> void </xsl:text>
+	        </xsl:if> 
+          <xsl:value-of select="@name"/>(
+    
+          <xsl:for-each select="/service/operation/inputMessage">
+	         <xsl:variable name="inputName" select="@name"/>
+	         <xsl:variable name="inputLowerName" select="lower-case($inputName)"/>
+	         <xsl:value-of select="$inputName"/>
+	         <xsl:text> </xsl:text>
+	         <xsl:value-of select="$inputLowerName"/> 
+	         <xsl:if test="(following-sibling::inputMessage)">
+	          <xsl:text>, </xsl:text>
+	         </xsl:if>
+           </xsl:for-each>
+         
+         );
 
         </xsl:for-each>
     <xsl:text>  

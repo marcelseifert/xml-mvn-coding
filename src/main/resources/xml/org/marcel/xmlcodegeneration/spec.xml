@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+  
 
+<service xmlns="http://xmlcodegeneration.marcel.org"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+ xsi:schemaLocation="http://xmlcodegeneration.marcel.org service.xsd"
+ xmlns:model="http://xmlcodegeneration.marcel.org/model"
+ xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
-<service>
-    	<description>Hello</description>
-    
-        <operation name="buildStuff" returnType="String" inputType="Person" exception="de.marcel.xmlgodegeneration.Exception" />
-        
-        <operation name="transformStuff" returnType="String" inputType="Kunde" />
-         
+ <description>a description</description>
+ <author>PiMaster</author>
+	 <operation name="buildStuff">
+	    <outputMessage package="java.lang" type="String"/>
+	    <inputMessage  package="org.marcel.xmlcodegeneration.model" type="Customer"/>
+	    <inputMessage  package="org.marcel.xmlcodegeneration.model" type="Office"/>
+	 </operation>
+	 
+	  <operation name="buildWithEmptyError">
+	    <outputMessage type="void"/> 
+	    <errorMessage package="java.lang" type="RuntimeException"/>
+	 </operation>
 </service>

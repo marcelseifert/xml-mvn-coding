@@ -25,9 +25,11 @@
                     </execution>
                 </executions>
                 <configuration>
+                   <packageName>com.example.myschema</packageName>
                     <transformationSets>
                         <transformationSet>
                             <dir>src/main/resources/xml</dir>
+                            <includes><include>spec.xml</include></includes>
                             <stylesheet>src/main/resources/xsl/interface.xsl</stylesheet>
                             <outputDir>src/main/java/</outputDir>
                             <!-- omitted other required fields -->
@@ -64,9 +66,9 @@
                 </executions>
                 <configuration>
                 <schemaDirectory>
-                ${basedir}/src/main/resources/xsd                              
-                             </schemaDirectory>
-                                     
+                ${basedir}/src/main/resources/xml/org/marcel/xmlcodegeneration                         
+                    </schemaDirectory>
+               		<schemaFiles>base.xsd,schema2.xsd</schemaFiles>                      
                     <!--  <packageName>com.example.myschema</packageName>  The name of your generated source package -->
                     <extension>true</extension>
                     <args>
