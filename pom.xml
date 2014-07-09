@@ -24,14 +24,13 @@
                         </goals>
                     </execution>
                 </executions>
-                <configuration>
-                   <packageName>com.example.myschema</packageName>
+                <configuration> 
                     <transformationSets>
                         <transformationSet>
-                            <dir>src/main/resources/xml</dir>
-                            <includes><include>spec.xml</include></includes>
+                            <dir>${basedir}/src/main/resources/xml</dir> 
                             <stylesheet>src/main/resources/xsl/interface.xsl</stylesheet>
                             <outputDir>src/main/java/</outputDir>
+                            
                             <!-- omitted other required fields -->
                             <fileMappers> 
                                 <fileMapper implementation="org.codehaus.plexus.components.io.filemappers.RegExpFileMapper">
